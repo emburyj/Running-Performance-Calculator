@@ -5,6 +5,9 @@ class Convert():
         pass
 
 class VDOT():
+    '''
+    source: http://www.simpsonassociatesinc.com/runningmath8.htm
+    '''
     def get_time(distance, vdot):
         '''
         This funcion calculates time (min) for a given distance (meters) and vdot
