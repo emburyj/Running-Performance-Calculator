@@ -16,7 +16,9 @@ def input_view(request):
 
         target_form =  target_race_form()
 
-        context = {'race_forms': race_forms, 'target': target_form}
+        rank_perf = {1: ['5,000m', '14:51'], 2: ['Mile', '4:13'], 3:['Marathon', '2:25:37']}
+
+        context = {'race_forms': race_forms, 'target': target_form, 'rank_perf': rank_perf}
         return render(request, 'input.html', context)
 
 def output_view(request):

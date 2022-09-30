@@ -7,35 +7,107 @@
                 <h6 style="font-family: Arial, Helvetica, sans-serif;">Write out the instructions here!</h6>
             </div>
         </div>
-        <div class="row">
-            {% for dict in race_forms %}
-                {% for distance, form in dict.items %}
-                    <div class="col-12 col-md-6 col-xl-auto flex-grow-1 d-flex pt-2">
-                        <div class="card flex-fill">
-                            <div class="card-header align-self-center">
-                                {{ distance }}
-                            </div>
-                            <div class="card-body py-4 align-self-center">
-                                {{ form }}
+        <form method="post">
+            {% csrf_token %}
+            <div class="row">
+                {% for dict in race_forms %}
+                    {% for distance, form in dict.items %}
+                        <div class="col-12 col-md-6 col-xl-auto flex-grow-1 d-flex pt-2">
+                            <div class="card flex-fill">
+                                <div class="card-header align-self-center">
+                                    {{ distance }}
+                                </div>
+                                <div class="card-body py-4 align-self-center">
+                                    {{ form }}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
-        </div>
-        <div class="row pt-5 justify-content-center">
-                <div class="card" style="width: 600px">
-                    <div class="card-header align-self-center">
-                        Target Race
-                    </div>
-                        <div class="card-body py-4 align-self-center">
-                            {{ target }}
+            </div>
+            <div class="row pt-5 justify-content-center">
+                    <div class="card" style="width: 600px">
+                        <div class="card-header align-self-center">
+                            Target Race
                         </div>
-                </div>
-        </div>
-        <div class="row">
+                            <div class="card-body py-4 align-self-center">
+                                {{ target }}
+                            </div>
+                    </div>
+            </div>
+            <div class="container text-center pt-5">
+                <div class="row justify-content-evenly">
+                    <div class="col-1">
+                        <button type="submit" name="calculate" value="something"
+                            class="btn btn-lg btn-outline-dark" style="--bs-btn-bg: #4682B4; font-family: Arial, Helvetica, sans-serif;">
+                                Calculate
+                        </button>
+                    </div>
 
-        </div>
+                    <div class="col-1">
+                        <button type="submit" name="calculate" value="something"
+                            class="btn btn-lg btn-outline-dark" style="--bs-btn-bg: #4682B4; font-family: Arial, Helvetica, sans-serif;">
+                                Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- output section start -->
+
+        <!-- START card for your target race prediction -->
+            <div class="row pt-5 justify-content-center">
+                    <div class="card" style="width: 600px">
+                        <div class="card-header align-self-center">
+                            Result Prediction Here
+                        </div>
+                            <div class="card-body py-4 align-self-center">
+                                here's your time!
+                            </div>
+                    </div>
+            </div>
+            <!-- START card for table ranking personal bests  -->
+            <div class="row pt-5 justify-content-center">
+                <div class="col-12 col-lg-5 col-xxl-4 d-flex">
+                    <div class="card flex-fill">
+                        <div class="card-header align-self-center">
+                            <h5 class="card-title mb-0">Personal Bests Ranked</h5>
+                        </div>
+                        <div class="dataTables_wrapper dt-bootstrap5 no-footer">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6"></div>
+                                <div class="col-sm-12 col-md-6"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm table-striped my-0 dataTable no-footer">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" scope="col">Rank</th>
+                                                <th class="text-center" scope="col">Distance</th>
+                                                <th class="text-center" scope="col">Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for key, val in rank_perf.items %}
+                                                <tr class="{% cycle 'even' 'odd' %}">
+                                                    <td class="text-center" >{{ key }}</td>
+                                                    {% for col in val %}
+                                                        <td class="text-center" >{{col}}</td>
+                                                    {% endfor %}
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
     </div>
 
 {% endblock %}
