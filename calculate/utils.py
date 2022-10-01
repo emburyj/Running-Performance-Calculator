@@ -17,6 +17,12 @@ class Convert():
         hours = math.floor(t/60)
         minutes = math.floor(t%60)
         seconds = int(round(60*(t - (hours*60 + minutes)), 0))
+        if minutes == 60:
+            minutes = 0
+            hours+=1
+        if seconds == 60:
+            seconds =0
+            minutes+=1
         if hours == 0:
             return f"{minutes:02}:{seconds:02}"
         else:
