@@ -76,12 +76,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # development db:
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mysite.db',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'mysite.db',
+#     }
+# }
 
 
 
