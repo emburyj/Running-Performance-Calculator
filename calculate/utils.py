@@ -3,6 +3,7 @@ import math
 class Convert():
 
     def grade_adjust(velocity, grade):
+        # adapted from https://medium.com/strava-engineering/an-improved-gap-model-8b07ae8886c3
         factor = .0015*(grade**2)+(.0301*grade)+.997
         return velocity*(1/factor)
 

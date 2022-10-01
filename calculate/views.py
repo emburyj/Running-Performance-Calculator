@@ -34,7 +34,7 @@ def input_view(request):
                 perfs = sorted(vdot_list, key=lambda x: x[0], reverse=True) # sorted (by vdot) list of performances [vdot, str(race distance), decimal distance in meters]
                 rank_perf = OrderedDict()
                 for i in range(1, len(perfs)+1):
-                    rank_perf[i] = [perfs[i-1][1], Convert.time_minutes_to_str(perfs[i-1][2])]
+                    rank_perf[i] = [perfs[i-1][1], Convert.time_minutes_to_str(perfs[i-1][2]), round(perfs[i-1][0], 2)]
 
                 target_form = target_race_form(request.POST)
                 if target_form.is_valid():
