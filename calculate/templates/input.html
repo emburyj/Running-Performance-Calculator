@@ -1,76 +1,28 @@
 {% extends "base.html" %}
 {% block center %}
-    <div class="container-fluid p-6">
-        <div class="row mb-2 mb-xl-3">
-            <div class="col-auto d-none d-sm-block">
-                <h3 style="font-family: Arial, Helvetica, sans-serif;">Instructions</h3>
-                <h6 style="font-family: Arial, Helvetica, sans-serif;">Write out the instructions here!</h6>
-            </div>
-        </div>
-        <form method="post">
-            {% csrf_token %}
-            <div class="row">
-                {% for dict in race_forms %}
-                    {% for distance, form in dict.items %}
-                        <div class="col-12 col-md-6 col-xl-auto flex-grow-1 d-flex pt-2">
-                            <div class="card flex-fill">
-                                <div class="card-header align-self-center">
-                                    {{ distance }}
-                                </div>
-                                <div class="card-body py-4 align-self-center">
-                                    {{ form }}
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% endfor %}
-            </div>
-            <div class="row pt-5 justify-content-center">
-                    <div class="card" style="width: 600px">
-                        <div class="card-header align-self-center">
-                            Target Race
-                        </div>
-                            <div class="card-body py-4 align-self-center">
-                                {{ target }}
-                            </div>
-                    </div>
-            </div>
-            <div class="container text-center pt-5">
-                <div class="row justify-content-evenly">
-                    <div class="col-1">
-                        <button type="submit" name="calculate" value="something"
-                            class="btn btn-lg btn-outline-dark" style="--bs-btn-bg: #4682B4; font-family: Arial, Helvetica, sans-serif;">
-                                Calculate
-                        </button>
-                    </div>
-
-                    <div class="col-1">
-                        <button type="submit" name="calculate" value="something"
-                            class="btn btn-lg btn-outline-dark" style="--bs-btn-bg: #4682B4; font-family: Arial, Helvetica, sans-serif;">
-                                Reset
-                        </button>
-                    </div>
+<form method="post">
+    {% csrf_token %}
+        {% if calculate %}
+            <div class="row mb-2 mb-xl-3 pt-2 px-2">
+                <div class="col-auto d-none d-sm-block">
+                    <h3 style="font-family: Arial, Helvetica, sans-serif;">Results</h3>
+                        <h5 style="font-family: Arial, Helvetica, sans-serif;">
+                            <p>
+                                Below you'll find our prediction for race performance for the given target distance<br>
+                                and average gradient. This prediction is based on the personal best running<br>
+                                performances at various standard distances. Addtionally, we've ranked your personal<br>
+                                best times based on <a href="http://www.simpsonassociatesinc.com/runningmath1.htm">VDOT</a>.
+                                Understanding your strengths and weaknesses as a<br>
+                                runner is an important factor in guiding future training.
+                            </p>
+                        </h5>
                 </div>
-            </div>
-        </form>
-        <!-- output section start -->
-
-        <!-- START card for your target race prediction -->
-            <div class="row pt-5 justify-content-center">
-                    <div class="card" style="width: 600px">
-                        <div class="card-header align-self-center">
-                            Result Prediction Here
-                        </div>
-                            <div class="card-body py-4 align-self-center">
-                                here's your time!
-                            </div>
-                    </div>
             </div>
             <!-- START card for table ranking personal bests  -->
             <div class="row pt-5 justify-content-center">
                 <div class="col-12 col-lg-5 col-xxl-4 d-flex">
                     <div class="card flex-fill">
-                        <div class="card-header align-self-center">
+                        <div class="card-header align-self-center card-header-style">
                             <h5 class="card-title mb-0">Personal Bests Ranked</h5>
                         </div>
                         <div class="dataTables_wrapper dt-bootstrap5 no-footer">
@@ -105,9 +57,91 @@
                     </div>
                 </div>
             </div>
-
-
-
+            <!-- END pb table -->
+        <!-- START card for your target race prediction -->
+            <div class="row pt-5 justify-content-center">
+                    <div class="card" style="width: 600px">
+                        {% for key, val in target_perf.items %}
+                        <div class="card-header align-self-center card-header-style">
+                            Target Race Prediction
+                        </div>
+                            <div class="card-body py-4 text-center">
+                                <p class="align-self-center">
+                                    <h3>{{ key }}</h3>
+                                </p>
+                                <p class="align-self-center">
+                                    <h1>{{ val }}</h1>
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+            </div>
+            <!-- End target race prediction -->
+        {% else %}
+    <div class="container-fluid p-6 pt-2">
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3 style="font-family: Arial, Helvetica, sans-serif;">Instructions</h3>
+                <h5 style="font-family: Arial, Helvetica, sans-serif;">
+                    <p>
+                        Welcome to the Running Performance Calculator!<br>
+                        Enter the times of your personal best running performances for the distances shown.<br>
+                        Next, enter a target race distance and average gradient for which we'll make a performance prediction.
+                    </p>
+                </h5>
+            </div>
+        </div>
+            <div class="row">
+                {% for dict in race_forms %}
+                    {% for distance, form in dict.items %}
+                        <div class="col-12 col-md-6 col-xl-auto flex-grow-1 d-flex pt-2">
+                            <div class="card flex-fill">
+                                <div class="card-header align-self-center card-header-style">
+                                    {{ distance }}
+                                </div>
+                                <div class="card-body py-4 align-self-center">
+                                    {{ form }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            <div class="row pt-5 justify-content-center">
+                    <div class="card" style="width: 700px">
+                        <div class="card-header align-self-center card-header-style">
+                            Target Race
+                        </div>
+                            <div class="card-body py-4 align-self-center">
+                                {{ target }}
+                            </div>
+                    </div>
+            </div>
     </div>
+        <!-- output section start -->
+        {% endif %}
+
+            <div class="container text-center pt-5">
+                <div class="row justify-content-evenly">
+                    {% if calculate %}
+                        <div class="col-1">
+                            <button type="submit" name="reset" value="reset"
+                                class="btn btn-lg btn-outline-dark" style="--bs-btn-bg: #FC4C02; font-family: Arial, Helvetica, sans-serif; color: white; font-weight: bold">
+                                    Reset
+                            </button>
+                        </div>
+                    {% else %}
+                        <div class="col-1">
+                            <button type="submit" name="calculate" value="calculate"
+                                class="btn btn-lg btn-outline-dark" style="--bs-btn-bg: #FC4C02; font-family: Arial, Helvetica, sans-serif; color: white; font-weight: bold">
+                                    Calculate
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+</form>
+
+
 
 {% endblock %}

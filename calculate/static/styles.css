@@ -3,9 +3,26 @@
 }
 
 .themeColor {
-    background-color: #4682B4; /*4682B4*//*20B2AA*/
+    background-color: #FFFFFF; /*4682B4*//*20B2AA*/
 }
 
 .backgroundColor {
-    background-color: #F0F8FF;
+    background-color: #F5F5F5
+}
+
+div.card-header-style {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #FC4C02;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+
+button.btn-primary-bg {
+    --bs-btn-bg: white;
+    border-radius: 50px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    --bs-btn-hover-bg: #FC4C02;
 }
