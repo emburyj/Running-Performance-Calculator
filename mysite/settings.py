@@ -6,6 +6,11 @@ import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+SECRET_KEY = config('SECRET_KEY')
+
+# For PRODUCTION:
+# -----------------------------------------------------------#
 
 IS_HEROKU = "DYNO" in os.environ
 if IS_HEROKU:
@@ -14,16 +19,19 @@ else:
     ALLOWED_HOSTS = []
 
 
-SECRET_KEY = config('SECRET_KEY')
 
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
 DEBUG = False
+# -----------------------------------------------------------#
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
+# For development:
+# -----------------------------------------------------------#
+# ALLOWED_HOSTS = []
+# DEBUG = True
 
 
 # Application definition

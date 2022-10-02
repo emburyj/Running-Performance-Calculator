@@ -3,20 +3,26 @@
 <form method="post">
     {% csrf_token %}
         {% if calculate %}
-            <div class="row mb-2 mb-xl-3 pt-2 px-2">
+            <div class="row mb-xl-3 pt-2 justify-content-center">
                 <div class="col-auto d-none d-sm-block">
-                    <h3 style="font-family: Arial, Helvetica, sans-serif;">Results</h3>
-                        <h5 style="font-family: Arial, Helvetica, sans-serif;">
-                            <p>
-                                Below you'll find our race performance prediction for the given target distance<br>
-                                and <a href="https://medium.com/strava-engineering/an-improved-gap-model-8b07ae8886c3">
-                                average gradient</a>. This prediction is based on your personal best running<br>
-                                performances at various standard distances. Addtionally, we've ranked your personal<br>
-                                best times based on <a href="http://www.simpsonassociatesinc.com/runningmath1.htm">VDOT</a>.
-                                Understanding your VDOT profile across various distances<br>
-                                can help to guide future training.
-                            </p>
-                        </h5>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 style="font-family: Arial, Helvetica, sans-serif;">Results</h3>
+                        </div>
+                        <div class="card-body">
+                            <h5 style="font-family: Arial, Helvetica, sans-serif;">
+                                <p>
+                                    Below you'll find our race performance prediction for the given target distance<br>
+                                    and <a href="https://medium.com/strava-engineering/an-improved-gap-model-8b07ae8886c3">
+                                    average gradient</a>. This prediction is based on your personal best running<br>
+                                    performances at various standard distances. Addtionally, we've ranked your personal<br>
+                                    best times based on <a href="http://www.simpsonassociatesinc.com/runningmath1.htm">VDOT</a>.
+                                    Understanding your VDOT profile across various distances<br>
+                                    can help to guide future training.
+                                </p>
+                            </h5>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- START card for table ranking personal bests  -->
@@ -81,16 +87,22 @@
             <!-- End target race prediction -->
         {% else %}
     <div class="container-fluid p-6 pt-2">
-        <div class="row mb-2 mb-xl-3">
+        <div class="row mb-2 mb-xl-3 justify-content-center">
             <div class="col-auto d-none d-sm-block">
-                <h3 style="font-family: Arial, Helvetica, sans-serif;">Instructions</h3>
-                <h5 style="font-family: Arial, Helvetica, sans-serif;">
-                    <p>
-                        Welcome to the Running Performance Calculator!<br>
-                        Enter the times of your personal best running performances for some, or all, of the distances shown.<br>
-                        Next, enter a target race distance and average gradient for which we'll make a performance prediction.
-                    </p>
-                </h5>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 style="font-family: Arial, Helvetica, sans-serif;">Instructions</h3>
+                    </div>
+                    <div class="card-body">
+                        <h5 style="font-family: Arial, Helvetica, sans-serif;">
+                            <p>
+                                Welcome to the Running Performance Calculator!<br>
+                                Enter the times of your personal best running performances for some, or all, of the distances shown.<br>
+                                Next, enter a target race distance and average gradient for which we'll make a performance prediction.
+                            </p>
+                        </h5>
+                    </div>
+                </div>
             </div>
         </div>
             <div class="row">
@@ -126,14 +138,14 @@
             <div class="container text-center pt-5">
                 <div class="row justify-content-evenly">
                     {% if calculate %}
-                        <div class="col-1">
+                        <div class="col-0">
                             <button type="submit" name="reset" value="reset"
                                 class="btn btn-lg btn-outline-dark" style="--bs-btn-bg: #FC4C02; font-family: Arial, Helvetica, sans-serif; color: white; font-weight: bold">
                                     Reset
                             </button>
                         </div>
                     {% else %}
-                        <div class="col-1">
+                        <div class="col-0">
                             <button type="submit" name="calculate" value="calculate"
                                 class="btn btn-lg btn-outline-dark" style="--bs-btn-bg: #FC4C02; font-family: Arial, Helvetica, sans-serif; color: white; font-weight: bold">
                                     Calculate
