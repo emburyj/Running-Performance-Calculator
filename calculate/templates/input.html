@@ -4,7 +4,8 @@
     {% csrf_token %}
         {% if calculate %}
             <div class="row mb-xl-3 pt-2 justify-content-center">
-                <div class="col-auto d-none d-sm-block">
+                <div class="col-auto d-flex d-sm-block">
+                    <!-- START card for results synopsis -->
                     <div class="card">
                         <div class="card-header">
                             <h3 style="font-family: Arial, Helvetica, sans-serif;">Results</h3>
@@ -88,7 +89,8 @@
         {% else %}
     <div class="container-fluid p-6 pt-2">
         <div class="row mb-2 mb-xl-3 justify-content-center">
-            <div class="col-auto d-none d-sm-block">
+            <div class="col-auto d-flex d-sm-block">
+                <!-- START card for instructions -->
                 <div class="card">
                     <div class="card-header">
                         <h3 style="font-family: Arial, Helvetica, sans-serif;">Instructions</h3>
